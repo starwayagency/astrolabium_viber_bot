@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI Emperor service
+
+[Service]
+ExecStartPre=/bin/bash -c 'mkdir -p /home/jurgeon/projects/astrolabium/astrolabium_viber_bot/src/config; chown jurgeon:www-data /home/jurgeon/projects/astrolabium/astrolabium_viber_bot/src/config'
+ExecStart=/usr/local/bin/uwsgi --emperor /home/jurgeon/projects/astrolabium/astrolabium_viber_bot/src/config 
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target 

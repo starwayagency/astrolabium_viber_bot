@@ -1,0 +1,38 @@
+
+
+
+
+server{
+    server_name astrolabiumviberbot.starway.agency;
+    
+    location / {
+        uwsgi_pass unix:/home/jurgeon/projects/astrolabium/astrolabium_viber_bot/src/config/astrolabium_viber_bot.sock;
+        include /etc/nginx/uwsgi_params;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/astrolabiumviberbot.starway.agency/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/astrolabiumviberbot.starway.agency/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+
+
+
+server{
+    if ($host = astrolabiumviberbot.starway.agency) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name astrolabiumviberbot.starway.agency;
+    return 404; # managed by Certbot
+
+
+}
